@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<?php
+include 'src/functions.php';
+// reference the function so you can create a drop down with the list of full cat names
+
+if (isset($_GET['breed']) && !empty($_GET['breed'])) {
+    $breedId = $_GET['breed'];
+    $images = getCatImages($breedId);
+} else {
+    // Redirect to index.php if no breed was selected
+    header("Location: index.php");
+    exit;
+}
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -26,9 +39,23 @@
         <!-- Page content-->
         <div class="container mt-5">
 
-        
+        <div class="row">
+        <!-- create the column for the carasouel -->
+        <div class="col-md-6">
+            <div class="carousel-wrapper">
+            <?php echo generateCarousel($images); ?>
+            </div>
+        </div>
 
-
+        <!-- column for the breedinfo -->
+            <div class="col-md-6">
+                <?php echo generateBreedInfo($images); ?>
+                    <br>
+                    <!-- include button for going back to dropdown index page -->
+                    <a href="index.php" class="btn btn-secondary mt-3">Back to Selection</a>
+                </div>
+            </div>
+        </div>
 
 
         </div>

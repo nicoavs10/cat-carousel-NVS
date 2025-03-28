@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+include 'src/functions.php';
+// reference the function so you can create a drop down with the list of full cat names
+$breeds = getCatBreeds();
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -25,12 +30,30 @@
         </nav>
         <!-- Page content-->
         <div class="container mt-5">
+        <h1>Select a Cat Breed</h1>
+    <form method="GET" action="carousel.php">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="breed" class="col-form-label">Breed:</label>
+        </div>
+        <div class="col-auto">
+          <select class="form-select" name="breed" id="breed" required>
+            <option value="" selected disabled>Select a breed</option>
 
+            <!-- dropdown menu created in src/functions -->
+            <?php echo indexDropdown($breeds); ?>
+          </select>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">View Carousel</button>
+        </div>
+      </div>
+    </form>
         
 
 
 
-
+        <!-- have not touched below -->
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
